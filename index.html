@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Foodie Pro</title>
+
+<style>
+body {font-family: Arial; background:#111; color:white; margin:0;}
+nav {background:#ff4d4d; padding:15px; text-align:center; font-size:22px;}
+
+.container {padding:20px; text-align:center;}
+
+input, button {
+    padding:10px;
+    margin:10px;
+    width:80%;
+}
+
+button {
+    background:#ff4d4d;
+    color:white;
+    border:none;
+}
+
+/* hidden */
+.hidden {display:none;}
+</style>
+</head>
+
+<body>
+
+<nav>Ramesh 👑 Pro Restaurant</nav>
+
+<!-- LOGIN -->
+<div class="container" id="loginBox">
+    <h1>Login</h2>
+    <input type="text" id="username" placeholder="Enter Name">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+</div>
+
+<!-- APP -->
+<div class="container hidden" id="app">
+
+    <h2>Menu</h2>
+
+    <button onclick="add('Pizza',199)">Pizza ₹199</button>
+    <button onclick="add('Burger',99)">Burger ₹99</button>
+    <button onclick="add('Pasta',149)">Pasta ₹149</button>
+
+    <h3>Cart</h3>
+    <ul id="cart"></ul>
+    <p>Total: ₹<span id="total">0</span></p>
+
+    <button onclick="order()">Order Now</button>
+
+    <h3>Book Table</h3>
+    <input type="date" id="date">
+    <input type="time" id="time">
+    <button onclick="book()">Book</button>
+
+    <p id="msg"></p>
+</div>
+
+<script>
+let total = 0;
+
+// LOGIN
+function login(){
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if(user=="" || pass==""){
+        alert("Enter details");
+        return;
+    }
+
+    localStorage.setItem("user", user);
+
+    document.getElementById("loginBox").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+}
+
+// CART
+function add(name, price){
+    let li = document.createElement("li");
+    li.innerText = name + " ₹" + price;
+    document.getElementById("cart").appendChild(li);
+
+    total += price;
+    document.getElementById("total").innerText = total;
+}
+
+// ORDER (WhatsApp)
+function order(){
+    if(total==0){
+        alert("Cart empty");
+        return;
+    }
+
+    let user = localStorage.getItem("user");
+
+    let message = "Order by " + user + " Total ₹" + total;
+
+    let phone = "9301110483"; 
+
+    let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+
+    window.open(url);
+}
+
+// BOOKING
+function book(){
+    let date = document.getElementById("date").value;
+    let time = document.getElementById("time").value;
+
+    if(date=="" || time==""){
+        alert("Fill details");
+        return;
+    }
+
+    localStorage.setItem("booking", date + " " + time);
+
+    document.getElementById("msg").innerText = "✅ Table Booked!";
+}
+</script><script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_ID",
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+</script>
+
+</body>
+</html></order
+order()
+    if(total==0){
+        alert("Cart empty");
+        return;
+    
+
+    let user = localStorage.getItem("user");
+
+    db.collection("orders").add(
+        name: user,
+        total: total,
+        time: new Date()
+    ).then(()=>
+    <seved></seved> </order;function order(){
+    if(cart.length === 0){
+        alert("Cart empty");
+        return;
+    }
+
+    let user = localStorage.getItem("user") || "Customer";
+
+    let message = "Order by " + user + " Total ₹" + total;
+
+    let phone = ""; // apna number
+
+    let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+
+    window.location.href = url; // 👈 IMPORTANT CHANGE
+}https://poetic-alpaca-e8cab8.netlify.app
